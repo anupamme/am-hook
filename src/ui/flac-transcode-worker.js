@@ -96,6 +96,7 @@ async function initTemplate() {
 }
 
 function withWasmInput(w, bytes, fn) {
+  if (bytes.length > MAX_FRAGMENT_BYTES) throw new Error('Invalid FLAC WASM input size');
   const ptr = w.flac_alloc(bytes.length);
   if (!ptr) throw new Error('FLAC WASM allocation failed');
   try {
